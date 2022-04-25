@@ -1,3 +1,17 @@
+//Add this to you script
+function run(){
+pass = false;
+while(!pass)
+{
+var password = prompt("Enter Password");
+//Change to your own Password
+if(password == 'interactivemachines'){
+    pass = true
+    }
+}
+}
+run();
+
 function on_ready(callback)
 {
 	if (document.readyState !== "loading")
@@ -12,7 +26,8 @@ on_ready(function() {
 	fetch("list_streams.json").then(data => data.json(), function(err) { status.textContent = err; }).then(function(json) {
 		for (let base_topic in json.camera_topics)
 		{
-			if (json.camera_topics.hasOwnProperty(base_topic))
+		console.log(base_topic);
+			if (json.camera_topics.hasOwnProperty(base_topic) && !base_topic.includes("kinect") && !base_topic.includes("realsense"))
 			{
 				let camera_li = document.createElement("li");
 				camera_li.textContent = base_topic;
@@ -21,12 +36,12 @@ on_ready(function() {
 				{
 					if (json.camera_topics[base_topic].hasOwnProperty(topic_name))
 					{
-						let topic_li = document.createElement("li");
-						let topic_a = document.createElement("a");
-						topic_a.href = "viewer?subscribe_video=ros_image:" + json.camera_topics[base_topic][topic_name];
-						topic_a.textContent = topic_name;
-						topic_li.appendChild(topic_a);
-						topic_ul.appendChild(topic_li);
+                            let topic_li = document.createElement("li");
+                            let topic_a = document.createElement("a");
+                            topic_a.href = "viewer?subscribe_video=ros_image:" + json.camera_topics[base_topic][topic_name];
+                            topic_a.textContent = topic_name;
+                            topic_li.appendChild(topic_a);
+                            topic_ul.appendChild(topic_li);
 					}
 				}
 				camera_li.appendChild(topic_ul);
@@ -35,7 +50,7 @@ on_ready(function() {
 		}
 		for (var i in json.image_topics)
 		{
-			if (json.image_topics.hasOwnProperty(i))
+			if (json.image_topics.hasOwnProperty(i) && !json.image_topics[i].includes("kinect") && !json.image_topics[i].includes("realsense"))
 			{
 				let topic_li = document.createElement("li");
 				let topic_a = document.createElement("a");
