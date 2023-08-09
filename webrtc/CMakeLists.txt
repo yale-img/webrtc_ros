@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
-project(webrtc)
+cmake_policy(SET CMP0048 NEW)
+project(webrtc VERSION 59.0.4)
 
 if(NOT IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/build/depot_tools" OR
    NOT IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/build/webrtc")

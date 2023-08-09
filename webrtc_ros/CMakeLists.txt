@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
-project(webrtc_ros)
+cmake_policy(SET CMP0048 NEW)
+project(webrtc_ros VERSION 59.0.4)
 
 find_package(catkin REQUIRED COMPONENTS
   async_web_server_cpp
